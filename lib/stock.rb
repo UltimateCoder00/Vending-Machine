@@ -2,6 +2,8 @@ require 'csv'
 
 class Stock
   attr_reader :prices, :quantities
+  MAXPRODUCTSTOCK = 10
+  POUNDTOPENNIESRATIO = 100
 
   def initialize
     @prices = CSV.new(File.new(Dir.pwd + '/lib/stock_prices_db.csv')).to_h
@@ -11,7 +13,7 @@ class Stock
 
   def add(product, quantity=1)
     fail "The product is invalid and cannot be added to stock" unless exists?(product)
-    quantities[product] += quantity
+    max?(product, quantity) ? quantities[product] = MAXPRODUCTSTOCK : quantities[product] += quantity
   end
 
   def remove(product)
@@ -28,7 +30,7 @@ class Stock
   end
 
   def render_prices_db
-    prices.each { |k, v| prices[k] = v.to_f / 100 }
+    prices.each { |k, v| prices[k] = v.to_f / POUNDTOPENNIESRATIO }
   end
 
   def render_quantities_db
@@ -40,6 +42,10 @@ class Stock
   end
 
   def empty?(product)
-    quantities[product] == 0
+    quantities[product].zero?
+  end
+
+  def max?(product, quantity)
+    quantities[product] + quantity > MAXPRODUCTSTOCK
   end
 end
