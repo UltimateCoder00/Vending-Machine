@@ -13,6 +13,10 @@ class Stock
     quantities[product] += quantity
   end
 
+  def remove(product)
+    quantities[product] -= 1
+  end
+
   private
 
   def render_db
