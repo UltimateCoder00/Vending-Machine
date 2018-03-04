@@ -15,6 +15,7 @@ class Stock
   end
 
   def remove(product)
+    fail "Error: The product is invalid and cannot be removed from stock" unless exists?(product)
     quantities[product] -= 1
   end
 
