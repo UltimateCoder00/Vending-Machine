@@ -25,4 +25,13 @@ describe VendingMachine do
       expect(vending_machine.select_item(item)).to eq quantity - 1
     end
   end
+
+  describe '#total_change' do
+    it 'Count total change' do
+      coins = ["1", "2", "5", "10", "20", "50", "100", "200"]
+      total = 388
+      coins.each { |coin| vending_machine.add_coin(coin) }
+      expect(vending_machine.total_change).to eq total
+    end
+  end
 end
