@@ -21,7 +21,7 @@ describe Stock do
 
     it 'Adding invalid product to stock' do
       product = "Fizzy Cola"
-      expect{stock.add(product)}.to raise_error "Error: The product is invalid and cannot be added to stock"
+      expect{stock.add(product)}.to raise_error "The product is invalid and cannot be added to stock"
     end
   end
 
@@ -36,12 +36,12 @@ describe Stock do
     it 'Remove out of stock product from stock' do
       product = "Coca Cola"
       10.times {stock.remove(product)}
-      expect{stock.remove(product)}.to raise_error "Error: There is no product to remove"
+      expect{stock.remove(product)}.to raise_error "There is no product to remove"
     end
 
     it 'Removing invalid product from stock' do
       product = "Fizzy Cola"
-      expect{stock.remove(product)}.to raise_error "Error: The product is invalid and cannot be removed from stock"
+      expect{stock.remove(product)}.to raise_error "The product is invalid and cannot be removed from stock"
     end
   end
 end

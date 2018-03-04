@@ -10,13 +10,13 @@ class Stock
   end
 
   def add(product, quantity=1)
-    fail "Error: The product is invalid and cannot be added to stock" unless exists?(product)
+    fail "The product is invalid and cannot be added to stock" unless exists?(product)
     quantities[product] += quantity
   end
 
   def remove(product)
-    fail "Error: The product is invalid and cannot be removed from stock" unless exists?(product)
-    fail "Error: There is no product to remove" if empty?(product)
+    fail "The product is invalid and cannot be removed from stock" unless exists?(product)
+    fail "There is no product to remove" if empty?(product)
     quantities[product] -= 1
   end
 
