@@ -18,6 +18,11 @@ describe Stock do
       stock.add(product, quantity_number)
       expect(stock.quantities[product]).to eq quantity + quantity_number
     end
+
+    it 'Adding invalid product to stock' do
+      product = "Fizzy Cola"
+      expect{stock.add(product)}.to raise_error "Error: The product is invalid and cannot be added to stock"
+    end
   end
 
   describe '#remove' do
