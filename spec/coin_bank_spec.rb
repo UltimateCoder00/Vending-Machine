@@ -18,5 +18,10 @@ describe CoinBank do
       coin_bank.add(coin, quantity_number)
       expect(coin_bank.quantities[coin]).to eq quantity + quantity_number
     end
+
+    it 'Adding invalid coin to coin bank' do
+      coin = "30"
+      expect{coin_bank.add(coin)}.to raise_error "The coin is invalid and cannot be added to bank"
+    end
   end
 end
