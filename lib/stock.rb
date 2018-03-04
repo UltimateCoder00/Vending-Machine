@@ -10,6 +10,7 @@ class Stock
   end
 
   def add(product, quantity=1)
+    fail "Error: The product is invalid and cannot be added to stock" unless exists?(product)
     quantities[product] += quantity
   end
 
@@ -30,5 +31,9 @@ class Stock
 
   def render_quantities_db
     quantities.each { |k, v| quantities[k] = v.to_i }
+  end
+
+  def exists?(product)
+    prices.include?(product)
   end
 end
