@@ -4,7 +4,7 @@ class CoinBank
   attr_reader :quantities
 
   def initialize
-    @quantities = CSV.new(File.new(Dir.pwd + '/lib/coin_bank_db.csv')).to_h
+    @quantities = CSV.new(File.new(Dir.pwd + './db/coin_bank_db.csv')).to_h
     render_db
   end
 

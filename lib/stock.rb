@@ -6,8 +6,8 @@ class Stock
   POUNDTOPENNIESRATIO = 100
 
   def initialize
-    @prices = CSV.new(File.new(Dir.pwd + '/lib/stock_prices_db.csv')).to_h
-    @quantities = CSV.new(File.new(Dir.pwd + '/lib/stock_quantities_db.csv')).to_h
+    @prices = CSV.new(File.new(Dir.pwd + './db/stock_prices_db.csv')).to_h
+    @quantities = CSV.new(File.new(Dir.pwd + './db/stock_quantities_db.csv')).to_h
     render_db
   end
 
