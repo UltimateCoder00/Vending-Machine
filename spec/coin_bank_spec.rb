@@ -38,5 +38,10 @@ describe CoinBank do
       100.times {coin_bank.remove(coin)}
       expect{coin_bank.remove(coin)}.to raise_error "There is no coin to remove"
     end
+
+    it 'Removing invalid coin from coin bank' do
+      coin = "30"
+      expect{coin_bank.remove(coin)}.to raise_error "The coin is invalid and cannot be removed from bank"
+    end
   end
 end
