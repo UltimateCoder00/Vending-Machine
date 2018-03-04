@@ -26,6 +26,10 @@ class VendingMachine
     total
   end
 
+  def return_change
+    @change = change_hash
+  end
+
   private
 
   def change_hash
