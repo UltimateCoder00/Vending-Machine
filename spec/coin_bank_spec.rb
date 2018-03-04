@@ -32,5 +32,11 @@ describe CoinBank do
       coin_bank.remove(coin)
       expect(coin_bank.quantities[coin]).to eq quantity - 1
     end
+
+    it 'Remove finished coin from coin bank' do
+      coin = "50"
+      100.times {coin_bank.remove(coin)}
+      expect{coin_bank.remove(coin)}.to raise_error "There is no coin to remove"
+    end
   end
 end
