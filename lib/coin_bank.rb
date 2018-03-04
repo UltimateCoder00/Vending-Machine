@@ -13,6 +13,12 @@ class CoinBank
     quantities[coin] += quantity
   end
 
+  def remove(coin)
+    fail "The coin is invalid and cannot be removed from bank" unless exists?(coin)
+    fail "There is no coin to remove" if empty?(coin)
+    quantities[coin] -= 1
+  end
+
   private
 
   def render_db
@@ -21,5 +27,9 @@ class CoinBank
 
   def exists?(coin)
     quantities.include?(coin)
+  end
+
+  def empty?(coin)
+    quantities[coin].zero?
   end
 end
