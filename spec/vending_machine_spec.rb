@@ -45,4 +45,15 @@ describe VendingMachine do
       expect(vending_machine.total_change).to eq total
     end
   end
+
+  describe '#return_change' do
+    it 'Return change given to machine' do
+      vending_machine.add_coin("50")
+      vending_machine.add_coin("20")
+      vending_machine.add_coin("10")
+      expect(vending_machine.total_change).to eq 80
+      vending_machine.return_change
+      expect(vending_machine.total_change).to eq 0
+    end
+  end
 end
