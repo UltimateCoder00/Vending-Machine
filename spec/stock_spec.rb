@@ -10,6 +10,14 @@ describe Stock do
       stock.add(product)
       expect(stock.quantities[product]).to eq quantity + 1
     end
+
+    it 'Add multiple quantities of a product' do
+      product = "Coca Cola"
+      quantity = stock.quantities[product]
+      quantity_number = 5
+      stock.add(product, quantity_number)
+      expect(stock.quantities[product]).to eq quantity + quantity_number
+    end
   end
 
   describe '#remove' do
