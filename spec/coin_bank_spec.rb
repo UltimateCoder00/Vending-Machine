@@ -24,4 +24,13 @@ describe CoinBank do
       expect{coin_bank.add(coin)}.to raise_error "The coin is invalid and cannot be added to bank"
     end
   end
+
+  describe '#remove' do
+    it 'Remove coin from coin bank' do
+      coin = "50"
+      quantity = coin_bank.quantities[coin]
+      coin_bank.remove(coin)
+      expect(coin_bank.quantities[coin]).to eq quantity - 1
+    end
+  end
 end
