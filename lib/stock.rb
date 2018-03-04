@@ -16,6 +16,7 @@ class Stock
 
   def remove(product)
     fail "Error: The product is invalid and cannot be removed from stock" unless exists?(product)
+    fail "Error: There is no product to remove" if empty?(product)
     quantities[product] -= 1
   end
 
@@ -36,5 +37,9 @@ class Stock
 
   def exists?(product)
     prices.include?(product)
+  end
+
+  def empty?(product)
+    quantities[product] == 0
   end
 end
