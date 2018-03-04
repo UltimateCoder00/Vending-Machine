@@ -32,5 +32,10 @@ describe Stock do
       stock.remove(product)
       expect(stock.quantities[product]).to eq quantity - 1
     end
+
+    it 'Removing invalid product from stock' do
+      product = "Fizzy Cola"
+      expect{stock.remove(product)}.to raise_error "Error: The product is invalid and cannot be removed from stock"
+    end
   end
 end
