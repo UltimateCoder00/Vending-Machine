@@ -11,6 +11,7 @@ class VendingMachine
   end
 
   def add_coin(coin)
+    fail "The coin is invalid and cannot be added" unless exists?(coin)
     change[coin] += 1
   end
 
@@ -18,5 +19,9 @@ class VendingMachine
 
   def change_hash
     {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
+  end
+
+  def exists?(coin)
+    change.include?(coin)
   end
 end
