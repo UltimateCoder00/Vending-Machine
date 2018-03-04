@@ -13,7 +13,8 @@ describe VendingMachine do
 
     it 'Adding invalid coin' do
       coin = "30"
-      expect{vending_machine.add_coin(coin)}.to raise_error "The coin is invalid and cannot be added"
+      error_message = "The coin is invalid and cannot be added"
+      expect{vending_machine.add_coin(coin)}.to raise_error error_message
     end
   end
 end

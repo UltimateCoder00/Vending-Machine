@@ -21,7 +21,8 @@ describe CoinBank do
 
     it 'Adding invalid coin to coin bank' do
       coin = "30"
-      expect{coin_bank.add(coin)}.to raise_error "The coin is invalid and cannot be added to bank"
+      error_message = "The coin is invalid and cannot be added to bank"
+      expect{coin_bank.add(coin)}.to raise_error error_message
     end
   end
 
@@ -36,12 +37,14 @@ describe CoinBank do
     it 'Remove finished coin from coin bank' do
       coin = "50"
       100.times {coin_bank.remove(coin)}
-      expect{coin_bank.remove(coin)}.to raise_error "There is no coin to remove"
+      error_message = "There is no coin to remove"
+      expect{coin_bank.remove(coin)}.to raise_error error_message
     end
 
     it 'Removing invalid coin from coin bank' do
       coin = "30"
-      expect{coin_bank.remove(coin)}.to raise_error "The coin is invalid and cannot be removed from bank"
+      error_message = "The coin is invalid and cannot be removed from bank"
+      expect{coin_bank.remove(coin)}.to raise_error error_message
     end
   end
 end
