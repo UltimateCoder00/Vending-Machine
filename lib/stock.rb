@@ -9,16 +9,22 @@ class Stock
     render_db
   end
 
+  def add(product, quantity=1)
+    quantities[product] += quantity
+  end
+
+  private
+
   def render_db
     render_prices_db
     render_quantities_db
   end
 
   def render_prices_db
-    prices.each { |key, value| prices[key] = value.to_f / 100 }
+    prices.each { |k, v| prices[k] = v.to_f / 100 }
   end
 
   def render_quantities_db
-    quantities.each { |key, value| quantities[key] = value.to_i }
+    quantities.each { |k, v| quantities[k] = v.to_i }
   end
 end
