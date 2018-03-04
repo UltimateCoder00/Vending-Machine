@@ -17,4 +17,12 @@ describe VendingMachine do
       expect{vending_machine.add_coin(coin)}.to raise_error error_message
     end
   end
+
+  describe '#select_item' do
+    it 'Select item' do
+      item = "Coca Cola"
+      quantity = vending_machine.stock.quantities[item]
+      expect(vending_machine.select_item(item)).to eq quantity - 1
+    end
+  end
 end
