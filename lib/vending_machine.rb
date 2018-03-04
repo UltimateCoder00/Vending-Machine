@@ -11,7 +11,7 @@ class VendingMachine
   end
 
   def select_item(item)
-    fail "You have insufficient change and need to add 30p more to buy a #{item}" if insufficient_change?(item)
+    fail "You have insufficient change and need to add #{cost_change_difference(item)}p more to buy a #{item}" if insufficient_change?(item)
     stock.remove(item)
   end
 
@@ -42,5 +42,9 @@ class VendingMachine
 
   def convert_to_pounds(change)
     change.to_f / Stock::POUNDTOPENNIESRATIO
+  end
+
+  def cost_change_difference(item)
+    (stock.prices[item] * Stock::POUNDTOPENNIESRATIO).to_i - total_change
   end
 end
