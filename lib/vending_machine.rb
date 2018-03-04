@@ -10,6 +10,10 @@ class VendingMachine
     @change = change_hash
   end
 
+  def select_item(item)
+    stock.remove(item)
+  end
+
   def add_coin(coin)
     fail "The coin is invalid and cannot be added" unless exists?(coin)
     change[coin] += 1
