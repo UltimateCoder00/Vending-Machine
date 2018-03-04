@@ -10,12 +10,15 @@ class Stock
   end
 
   def render_db
-    prices.each do |key, value|
-      prices[key] = value.to_f / 100
-    end
+    render_prices_db
+    render_quantities_db
+  end
 
-    quantities.each do |key, value|
-      quantities[key] = value.to_i
-    end
+  def render_prices_db
+    prices.each { |key, value| prices[key] = value.to_f / 100 }
+  end
+
+  def render_quantities_db
+    quantities.each { |key, value| quantities[key] = value.to_i }
   end
 end
