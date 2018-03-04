@@ -19,6 +19,12 @@ class VendingMachine
     change[coin] += 1
   end
 
+  def total_change
+    total = 0
+    change.each { |k, v| total += k.to_i * v }
+    total
+  end
+
   private
 
   def change_hash
