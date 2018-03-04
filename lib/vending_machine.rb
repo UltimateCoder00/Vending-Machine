@@ -10,6 +10,12 @@ class VendingMachine
     @change = change_hash
   end
 
+  def add_coin(coin)
+    change[coin] += 1
+  end
+
+  private
+
   def change_hash
     {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
   end
