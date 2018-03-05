@@ -37,4 +37,21 @@ describe ChangeMachine do
       expect(change_machine.total_change).to eq 0
     end
   end
+
+  describe '#complete_transaction' do
+    it 'Complete Transaction' do
+      coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>100, "50"=>100, "100"=>100, "200"=>50}
+      expect(change_machine.bank.quantities).to eq coin_bank_hash
+      change_machine.add_coin("50")
+      change_machine.add_coin("20")
+      change_machine.add_coin("100")
+      coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>1, "50"=>1, "100"=>1, "200"=>0}
+      expect(change_machine.coins).to eq coins
+      new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>101, "50"=>101, "100"=>101, "200"=>50}
+      change_machine.complete_transaction
+      expect(change_machine.bank.quantities).to eq new_coin_bank_hash
+      new_coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
+      expect(change_machine.coins).to eq new_coins
+    end
+  end
 end
