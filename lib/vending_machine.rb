@@ -1,5 +1,5 @@
-require './lib/stock'
-require './lib/change_machine'
+require_relative 'stock'
+require_relative 'change_machine'
 
 class VendingMachine
   attr_reader :stock, :change
