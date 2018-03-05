@@ -4,9 +4,9 @@ require './lib/coin_bank'
 class VendingMachine
   attr_reader :stock, :coins, :change
 
-  def initialize
-    @stock = Stock.new
-    @coins = CoinBank.new
+  def initialize(stock=Stock.new, coins=CoinBank.new)
+    @stock = stock
+    @coins = coins
     @change = change_hash
   end
 
