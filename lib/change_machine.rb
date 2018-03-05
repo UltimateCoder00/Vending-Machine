@@ -1,8 +1,11 @@
-class ChangeMachine
-  attr_reader :coins
+require_relative 'coin_bank'
 
-  def initialize
+class ChangeMachine
+  attr_reader :coins, :bank
+
+  def initialize(bank=CoinBank.new)
     @coins = change_hash
+    @bank = bank
   end
 
   def add_coin(coin)
@@ -18,6 +21,11 @@ class ChangeMachine
 
   def return_change
     @coins = change_hash
+  end
+
+  def complete_transaction
+    bank.quantities.each { |k, v| bank.quantities[k] += coins[k] }
+    return_change
   end
 
   private
