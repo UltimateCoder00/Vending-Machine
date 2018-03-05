@@ -3,7 +3,6 @@ require 'csv'
 class Stock
   attr_reader :prices, :quantities
   MAXPRODUCTSTOCK = 10
-  POUNDTOPENNIESRATIO = 100
 
   def initialize
     @prices = CSV.new(File.new(Dir.pwd + './db/stock_prices_db.csv')).to_h
@@ -30,7 +29,7 @@ class Stock
   end
 
   def render_prices_db
-    prices.each { |k, v| prices[k] = v.to_f / POUNDTOPENNIESRATIO }
+    prices.each { |k, v| prices[k] = v.to_i }
   end
 
   def render_quantities_db

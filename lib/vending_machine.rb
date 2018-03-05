@@ -41,14 +41,10 @@ class VendingMachine
   end
 
   def insufficient_change?(item)
-    convert_to_pounds(total_change) < stock.prices[item]
-  end
-
-  def convert_to_pounds(change)
-    change.to_f / Stock::POUNDTOPENNIESRATIO
+    total_change < stock.prices[item]
   end
 
   def cost_change_difference(item)
-    (stock.prices[item] * Stock::POUNDTOPENNIESRATIO).to_i - total_change
+    stock.prices[item] - total_change
   end
 end
