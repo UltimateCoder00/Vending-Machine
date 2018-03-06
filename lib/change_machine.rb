@@ -28,6 +28,15 @@ class ChangeMachine
     return_change
   end
 
+  def return_transcation_change(item_cost)
+    return_coins = total_change - item_cost
+    bank.quantities.reverse_each do |k, v|
+      next if return_coins < k.to_i
+      bank.quantities[k] -= return_coins / k.to_i
+      return_coins = return_coins % k.to_i
+    end
+  end
+
   private
 
   def change_hash
