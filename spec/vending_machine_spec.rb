@@ -29,6 +29,15 @@ describe VendingMachine do
       error_message = "You have insufficient change and need to add 30p more to buy a Coca Cola"
       expect{vending_machine.select_item(item)}.to raise_error error_message
     end
+
+    it 'extra money given' do
+      item = "Coca Cola"
+      vending_machine.add_coin("50")
+      vending_machine.add_coin("200")
+      vending_machine.add_coin("100")
+      quantity = vending_machine.stock.quantities[item]
+      expect(vending_machine.select_item(item)).to eq quantity - 1
+    end
   end
 
   describe '#total_change_given' do
