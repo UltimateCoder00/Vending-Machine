@@ -18,7 +18,7 @@ describe VendingMachine do
       vending_machine.add_coin("50")
       vending_machine.add_coin("20")
       vending_machine.add_coin("10")
-      quantity = vending_machine.stock.quantities[item]
+      quantity = vending_machine.stock.product_quantity_list[item]
       expect(vending_machine.select_item(item)).to eq quantity - 1
     end
 
@@ -35,7 +35,7 @@ describe VendingMachine do
       vending_machine.add_coin("50")
       vending_machine.add_coin("200")
       vending_machine.add_coin("100")
-      quantity = vending_machine.stock.quantities[item]
+      quantity = vending_machine.stock.product_quantity_list[item]
       expect(vending_machine.select_item(item)).to eq quantity - 1
     end
   end

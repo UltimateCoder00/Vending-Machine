@@ -7,18 +7,18 @@ describe Stock do
     it 'Add product to stock' do
       product = "Coca Cola"
       5.times {stock.remove(product)}
-      quantity = stock.quantities[product]
+      quantity = stock.product_quantity_list[product]
       stock.add(product)
-      expect(stock.quantities[product]).to eq quantity + 1
+      expect(stock.product_quantity_list[product]).to eq quantity + 1
     end
 
     it 'Add multiple quantities of a product' do
       product = "Coca Cola"
       6.times {stock.remove(product)}
-      quantity = stock.quantities[product]
+      quantity = stock.product_quantity_list[product]
       quantity_number = 5
       stock.add(product, quantity_number)
-      expect(stock.quantities[product]).to eq quantity + quantity_number
+      expect(stock.product_quantity_list[product]).to eq quantity + quantity_number
     end
 
     it 'Adding invalid product to stock' do
@@ -32,16 +32,16 @@ describe Stock do
       5.times {stock.remove(product)}
       quantity_number = 10
       stock.add(product, quantity_number)
-      expect(stock.quantities[product]).to eq 10
+      expect(stock.product_quantity_list[product]).to eq 10
     end
   end
 
   describe '#remove' do
     it 'Remove product from stock' do
       product = "Coca Cola"
-      quantity = stock.quantities[product]
+      quantity = stock.product_quantity_list[product]
       stock.remove(product)
-      expect(stock.quantities[product]).to eq quantity - 1
+      expect(stock.product_quantity_list[product]).to eq quantity - 1
     end
 
     it 'Remove out of stock product from stock' do

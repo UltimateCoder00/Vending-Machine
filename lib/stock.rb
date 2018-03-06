@@ -1,24 +1,24 @@
 require 'csv'
 
 class Stock
-  attr_reader :price_list, :quantities
+  attr_reader :price_list, :product_quantity_list
   MAXPRODUCTSTOCK = 10
 
   def initialize
     @price_list = CSV.new(File.new(Dir.pwd + './db/stock_prices_db.csv')).to_h
-    @quantities = CSV.new(File.new(Dir.pwd + './db/stock_quantities_db.csv')).to_h
+    @product_quantity_list = CSV.new(File.new(Dir.pwd + './db/stock_quantities_db.csv')).to_h
     render_db
   end
 
   def add(product, quantity=1)
     fail "The product is invalid and cannot be added to stock" unless exists?(product)
-    max?(product, quantity) ? quantities[product] = MAXPRODUCTSTOCK : quantities[product] += quantity
+    max?(product, quantity) ? product_quantity_list[product] = MAXPRODUCTSTOCK : product_quantity_list[product] += quantity
   end
 
   def remove(product)
     fail "The product is invalid and cannot be removed from stock" unless exists?(product)
     fail "There is no product to remove" if empty?(product)
-    quantities[product] -= 1
+    product_quantity_list[product] -= 1
   end
 
   private
@@ -33,7 +33,7 @@ class Stock
   end
 
   def render_quantities_db
-    quantities.each { |k, v| quantities[k] = v.to_i }
+    product_quantity_list.each { |k, v| product_quantity_list[k] = v.to_i }
   end
 
   def exists?(product)
@@ -41,10 +41,10 @@ class Stock
   end
 
   def empty?(product)
-    quantities[product].zero?
+    product_quantity_list[product].zero?
   end
 
   def max?(product, quantity)
-    quantities[product] + quantity > MAXPRODUCTSTOCK
+    product_quantity_list[product] + quantity > MAXPRODUCTSTOCK
   end
 end
