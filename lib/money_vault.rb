@@ -1,6 +1,6 @@
 require 'csv'
 
-class CoinBank
+class MoneyVault
   attr_reader :quantities
 
   def initialize

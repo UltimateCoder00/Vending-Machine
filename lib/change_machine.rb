@@ -1,9 +1,9 @@
-require_relative 'coin_bank'
+require_relative 'money_vault'
 
 class ChangeMachine
   attr_reader :coins, :bank
 
-  def initialize(bank=CoinBank.new)
+  def initialize(bank=MoneyVault.new)
     @coins = change_hash
     @bank = bank
   end
