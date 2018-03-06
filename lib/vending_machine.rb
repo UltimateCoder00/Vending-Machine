@@ -13,7 +13,6 @@ class VendingMachine
     fail "You have insufficient change and need to add #{missing_change(item)}p more to buy a #{item}" if insufficient_change?(item)
     p "Please collect your change of #{change_given(item)}p" unless change?(item)
     change_machine.return_change(item_price(item))
-    change_machine.complete_transaction
     stock.remove(item)
   end
 

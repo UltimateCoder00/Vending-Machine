@@ -23,19 +23,10 @@ class ChangeMachine
     @change = empty_change_vault
   end
 
-  def complete_transaction
-    vault.coin_stored_list.each { |k, _v| vault.coin_stored_list[k] += change[k] }
-    return_given_change
-  end
-
   def return_change(item_cost)
-    change = total_change - item_cost
-    vault.coin_stored_list.reverse_each do |k, v|
-      next if change < k.to_i
-      vault.coin_stored_list[k] -= change / k.to_i
-      change = change % k.to_i
-    end
-    change
+    add_given_change_to_vault
+    take_change_from_vault_and_return(item_cost)
+    return_given_change
   end
 
   private
@@ -46,5 +37,18 @@ class ChangeMachine
 
   def coin_exists?(coin)
     change.include?(coin)
+  end
+
+  def add_given_change_to_vault
+    vault.coin_stored_list.each { |k, _v| vault.coin_stored_list[k] += change[k] }
+  end
+
+  def take_change_from_vault_and_return(item_cost)
+    change = total_change - item_cost
+    vault.coin_stored_list.reverse_each do |k, _v|
+      next if change < k.to_i
+      vault.coin_stored_list[k] -= change / k.to_i
+      change = change % k.to_i
+    end
   end
 end

@@ -38,23 +38,6 @@ describe ChangeMachine do
     end
   end
 
-  describe '#complete_transaction' do
-    it 'Complete Transaction' do
-      coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>100, "50"=>100, "100"=>100, "200"=>50}
-      expect(change_machine.vault.coin_stored_list).to eq coin_bank_hash
-      change_machine.add("50")
-      change_machine.add("20")
-      change_machine.add("100")
-      coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>1, "50"=>1, "100"=>1, "200"=>0}
-      expect(change_machine.change).to eq coins
-      new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>101, "50"=>101, "100"=>101, "200"=>50}
-      change_machine.complete_transaction
-      expect(change_machine.vault.coin_stored_list).to eq new_coin_bank_hash
-      new_coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
-      expect(change_machine.change).to eq new_coins
-    end
-  end
-
   describe '#return_change' do
     it 'Return change 1' do
       coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>100, "50"=>100, "100"=>100, "200"=>50}
@@ -63,9 +46,13 @@ describe ChangeMachine do
       change_machine.add("20")
       change_machine.add("100")
       expect(change_machine.total_change).to eq 170
+      coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>1, "50"=>1, "100"=>1, "200"=>0}
+      expect(change_machine.change).to eq coins
       item_cost = 80
-      new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>98, "50"=>99, "100"=>100, "200"=>50}
       change_machine.return_change(item_cost)
+      new_coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
+      expect(change_machine.change).to eq new_coins
+      new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>99, "50"=>100, "100"=>101, "200"=>50}
       expect(change_machine.vault.coin_stored_list).to eq new_coin_bank_hash
     end
 
@@ -76,9 +63,13 @@ describe ChangeMachine do
       change_machine.add("200")
       change_machine.add("1")
       expect(change_machine.total_change).to eq 211
+      coins = {"1"=>1, "2"=>0, "5"=>0, "10"=>1, "20"=>0, "50"=>0, "100"=>0, "200"=>1}
+      expect(change_machine.change).to eq coins
       item_cost = 78
-      new_coin_bank_hash = {"1"=>999, "2"=>499, "5"=>200, "10"=>199, "20"=>99, "50"=>100, "100"=>99, "200"=>50}
       change_machine.return_change(item_cost)
+      new_coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
+      expect(change_machine.change).to eq new_coins
+      new_coin_bank_hash = {"1"=>1000, "2"=>499, "5"=>200, "10"=>200, "20"=>99, "50"=>100, "100"=>99, "200"=>51}
       expect(change_machine.vault.coin_stored_list).to eq new_coin_bank_hash
     end
   end
