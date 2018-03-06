@@ -45,10 +45,15 @@ class ChangeMachine
 
   def take_change_from_vault_and_return(item_cost)
     change = total_change - item_cost
-    vault.coin_stored_list.reverse_each do |k, _v|
-      next if change < k.to_i
-      vault.coin_stored_list[k] -= change / k.to_i
-      change = change % k.to_i
-    end
+    vault.coin_stored_list.reverse_each { |k, _v| change = remaining_change(change, k.to_i) }
+  end
+
+  def remaining_change(change, coin)
+    change < coin ? change : remove_coin_from_vault(change, coin)
+  end
+
+  def remove_coin_from_vault(change, coin)
+    vault.coin_stored_list[coin.to_s] -= change / coin
+    change % coin
   end
 end
