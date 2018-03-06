@@ -6,17 +6,17 @@ describe MoneyVault do
   describe '#add' do
     it 'Add coin to coin bank' do
       coin = "50"
-      quantity = money_vault.quantities[coin]
+      quantity = money_vault.coin_stored_list[coin]
       money_vault.add(coin)
-      expect(money_vault.quantities[coin]).to eq quantity + 1
+      expect(money_vault.coin_stored_list[coin]).to eq quantity + 1
     end
 
     it 'Add multiple quantities of a coin' do
       coin = "50"
-      quantity = money_vault.quantities[coin]
+      quantity = money_vault.coin_stored_list[coin]
       quantity_number = 5
       money_vault.add(coin, quantity_number)
-      expect(money_vault.quantities[coin]).to eq quantity + quantity_number
+      expect(money_vault.coin_stored_list[coin]).to eq quantity + quantity_number
     end
 
     it 'Adding invalid coin to coin bank' do
@@ -29,9 +29,9 @@ describe MoneyVault do
   describe '#remove' do
     it 'Remove coin from coin bank' do
       coin = "50"
-      quantity = money_vault.quantities[coin]
+      quantity = money_vault.coin_stored_list[coin]
       money_vault.remove(coin)
-      expect(money_vault.quantities[coin]).to eq quantity - 1
+      expect(money_vault.coin_stored_list[coin]).to eq quantity - 1
     end
 
     it 'Remove finished coin from coin bank' do

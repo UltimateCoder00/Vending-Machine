@@ -24,15 +24,15 @@ class ChangeMachine
   end
 
   def complete_transaction
-    bank.quantities.each { |k, v| bank.quantities[k] += coins[k] }
+    bank.coin_stored_list.each { |k, v| bank.coin_stored_list[k] += coins[k] }
     return_change
   end
 
   def return_transcation_change(item_cost)
     return_coins = total_change - item_cost
-    bank.quantities.reverse_each do |k, v|
+    bank.coin_stored_list.reverse_each do |k, v|
       next if return_coins < k.to_i
-      bank.quantities[k] -= return_coins / k.to_i
+      bank.coin_stored_list[k] -= return_coins / k.to_i
       return_coins = return_coins % k.to_i
     end
   end
