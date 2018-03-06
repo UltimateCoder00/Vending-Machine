@@ -6,9 +6,9 @@ describe VendingMachine do
   describe '#add_coin' do
     it 'Add change' do
       coin = "50"
-      expect(vending_machine.change.change[coin]).to eq 0
+      expect(vending_machine.change_machine.change[coin]).to eq 0
       vending_machine.add_coin(coin)
-      expect(vending_machine.change.change[coin]).to eq 1
+      expect(vending_machine.change_machine.change[coin]).to eq 1
     end
   end
 

@@ -2,31 +2,31 @@ require_relative 'stock'
 require_relative 'change_machine'
 
 class VendingMachine
-  attr_reader :stock, :change
+  attr_reader :stock, :change_machine
 
-  def initialize(stock=Stock.new, change=ChangeMachine.new)
+  def initialize(stock=Stock.new, change_machine=ChangeMachine.new)
     @stock = stock
-    @change = change
+    @change_machine = change_machine
   end
 
   def select_item(item)
     fail "You have insufficient change and need to add #{cost_change_difference(item)}p more to buy a #{item}" if insufficient_change?(item)
     p "Please collect your change of #{change_given(item)}p" unless change?(item)
-    change.return_change(price?(item))
-    change.complete_transaction
+    change_machine.return_change(price?(item))
+    change_machine.complete_transaction
     stock.remove(item)
   end
 
   def add_coin(coin)
-    change.add(coin)
+    change_machine.add(coin)
   end
 
   def total_change_given
-    change.total_change
+    change_machine.total_change
   end
 
   def return_change_given
-    change.return_given_change
+    change_machine.return_given_change
   end
 
   private
