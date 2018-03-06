@@ -48,6 +48,6 @@ class VendingMachine
   end
 
   def price?(item)
-    stock.prices[item]
+    stock.price_list[item]
   end
 end

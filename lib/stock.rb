@@ -1,11 +1,11 @@
 require 'csv'
 
 class Stock
-  attr_reader :prices, :quantities
+  attr_reader :price_list, :quantities
   MAXPRODUCTSTOCK = 10
 
   def initialize
-    @prices = CSV.new(File.new(Dir.pwd + './db/stock_prices_db.csv')).to_h
+    @price_list = CSV.new(File.new(Dir.pwd + './db/stock_prices_db.csv')).to_h
     @quantities = CSV.new(File.new(Dir.pwd + './db/stock_quantities_db.csv')).to_h
     render_db
   end
@@ -29,7 +29,7 @@ class Stock
   end
 
   def render_prices_db
-    prices.each { |k, v| prices[k] = v.to_i }
+    price_list.each { |k, v| price_list[k] = v.to_i }
   end
 
   def render_quantities_db
@@ -37,7 +37,7 @@ class Stock
   end
 
   def exists?(product)
-    prices.include?(product)
+    price_list.include?(product)
   end
 
   def empty?(product)
