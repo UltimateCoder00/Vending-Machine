@@ -18,7 +18,7 @@ class VendingMachine
   end
 
   def add_coin(coin)
-    change.add_coin(coin)
+    change.add(coin)
   end
 
   def total_change_given

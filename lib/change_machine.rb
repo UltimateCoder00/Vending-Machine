@@ -8,7 +8,7 @@ class ChangeMachine
     @bank = bank
   end
 
-  def add_coin(coin)
+  def add(coin)
     fail "The coin is invalid and cannot be added" unless exists?(coin)
     coins[coin] += 1
   end
