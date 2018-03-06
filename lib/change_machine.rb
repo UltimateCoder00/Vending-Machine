@@ -1,11 +1,11 @@
 require_relative 'money_vault'
 
 class ChangeMachine
-  attr_reader :coins, :bank
+  attr_reader :coins, :vault
 
-  def initialize(bank=MoneyVault.new)
+  def initialize(vault=MoneyVault.new)
     @coins = empty_change_vault
-    @bank = bank
+    @vault = vault
   end
 
   def add(coin)
@@ -24,15 +24,15 @@ class ChangeMachine
   end
 
   def complete_transaction
-    bank.coin_stored_list.each { |k, _v| bank.coin_stored_list[k] += coins[k] }
+    vault.coin_stored_list.each { |k, _v| vault.coin_stored_list[k] += coins[k] }
     return_given_change
   end
 
   def return_change(item_cost)
     change = total_change - item_cost
-    bank.coin_stored_list.reverse_each do |k, v|
+    vault.coin_stored_list.reverse_each do |k, v|
       next if change < k.to_i
-      bank.coin_stored_list[k] -= change / k.to_i
+      vault.coin_stored_list[k] -= change / k.to_i
       change = change % k.to_i
     end
     change
