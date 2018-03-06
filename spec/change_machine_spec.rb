@@ -27,13 +27,13 @@ describe ChangeMachine do
     end
   end
 
-  describe '#return_change' do
+  describe '#return_given_change' do
     it 'Return change given to machine' do
       change_machine.add("50")
       change_machine.add("20")
       change_machine.add("10")
       expect(change_machine.total_change).to eq 80
-      change_machine.return_change
+      change_machine.return_given_change
       expect(change_machine.total_change).to eq 0
     end
   end
@@ -55,7 +55,7 @@ describe ChangeMachine do
     end
   end
 
-  describe '#return_transcation_change' do
+  describe '#return_change' do
     it 'Return change 1' do
       coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>100, "50"=>100, "100"=>100, "200"=>50}
       expect(change_machine.bank.coin_stored_list).to eq coin_bank_hash
@@ -65,7 +65,7 @@ describe ChangeMachine do
       expect(change_machine.total_change).to eq 170
       item_cost = 80
       new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>98, "50"=>99, "100"=>100, "200"=>50}
-      change_machine.return_transcation_change(item_cost)
+      change_machine.return_change(item_cost)
       expect(change_machine.bank.coin_stored_list).to eq new_coin_bank_hash
     end
 
@@ -78,7 +78,7 @@ describe ChangeMachine do
       expect(change_machine.total_change).to eq 211
       item_cost = 78
       new_coin_bank_hash = {"1"=>999, "2"=>499, "5"=>200, "10"=>199, "20"=>99, "50"=>100, "100"=>99, "200"=>50}
-      change_machine.return_transcation_change(item_cost)
+      change_machine.return_change(item_cost)
       expect(change_machine.bank.coin_stored_list).to eq new_coin_bank_hash
     end
   end

@@ -4,12 +4,12 @@ class ChangeMachine
   attr_reader :coins, :bank
 
   def initialize(bank=MoneyVault.new)
-    @coins = change_hash
+    @coins = empty_change_vault
     @bank = bank
   end
 
   def add(coin)
-    fail "The coin is invalid and cannot be added" unless exists?(coin)
+    fail "The coin is invalid and cannot be added" unless coin_exists?(coin)
     coins[coin] += 1
   end
 
@@ -19,31 +19,32 @@ class ChangeMachine
     total
   end
 
-  def return_change
-    @coins = change_hash
+  def return_given_change
+    @coins = empty_change_vault
   end
 
   def complete_transaction
-    bank.coin_stored_list.each { |k, v| bank.coin_stored_list[k] += coins[k] }
-    return_change
+    bank.coin_stored_list.each { |k, _v| bank.coin_stored_list[k] += coins[k] }
+    return_given_change
   end
 
-  def return_transcation_change(item_cost)
-    return_coins = total_change - item_cost
+  def return_change(item_cost)
+    change = total_change - item_cost
     bank.coin_stored_list.reverse_each do |k, v|
-      next if return_coins < k.to_i
-      bank.coin_stored_list[k] -= return_coins / k.to_i
-      return_coins = return_coins % k.to_i
+      next if change < k.to_i
+      bank.coin_stored_list[k] -= change / k.to_i
+      change = change % k.to_i
     end
+    change
   end
 
   private
 
-  def change_hash
+  def empty_change_vault
     {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
   end
 
-  def exists?(coin)
+  def coin_exists?(coin)
     coins.include?(coin)
   end
 end
