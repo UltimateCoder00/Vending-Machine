@@ -11,6 +11,9 @@ class VendingMachine
 
   def select_item(item)
     fail "You have insufficient change and need to add #{cost_change_difference(item)}p more to buy a #{item}" if insufficient_change?(item)
+    p "Please collect your change of #{change_given(item)}p" unless change?(item)
+    change.return_transcation_change(price?(item))
+    change.complete_transaction
     stock.remove(item)
   end
 
@@ -29,10 +32,22 @@ class VendingMachine
   private
 
   def insufficient_change?(item)
-    total_change_given < stock.prices[item]
+    total_change_given < price?(item)
   end
 
   def cost_change_difference(item)
-    stock.prices[item] - total_change_given
+    price?(item) - total_change_given
+  end
+
+  def change_given(item)
+    total_change_given - price?(item)
+  end
+
+  def change?(item)
+    change_given(item).zero?
+  end
+
+  def price?(item)
+    stock.prices[item]
   end
 end
