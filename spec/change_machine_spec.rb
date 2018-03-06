@@ -6,9 +6,9 @@ describe ChangeMachine do
   describe '#add' do
     it 'Add change' do
       coin = "50"
-      expect(change_machine.coins[coin]).to eq 0
+      expect(change_machine.change[coin]).to eq 0
       change_machine.add(coin)
-      expect(change_machine.coins[coin]).to eq 1
+      expect(change_machine.change[coin]).to eq 1
     end
 
     it 'Adding invalid coin' do
@@ -46,12 +46,12 @@ describe ChangeMachine do
       change_machine.add("20")
       change_machine.add("100")
       coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>1, "50"=>1, "100"=>1, "200"=>0}
-      expect(change_machine.coins).to eq coins
+      expect(change_machine.change).to eq coins
       new_coin_bank_hash = {"1"=>1000, "2"=>500, "5"=>200, "10"=>200, "20"=>101, "50"=>101, "100"=>101, "200"=>50}
       change_machine.complete_transaction
       expect(change_machine.vault.coin_stored_list).to eq new_coin_bank_hash
       new_coins = {"1"=>0, "2"=>0, "5"=>0, "10"=>0, "20"=>0, "50"=>0, "100"=>0, "200"=>0}
-      expect(change_machine.coins).to eq new_coins
+      expect(change_machine.change).to eq new_coins
     end
   end
 

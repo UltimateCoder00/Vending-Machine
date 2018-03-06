@@ -1,30 +1,30 @@
 require_relative 'money_vault'
 
 class ChangeMachine
-  attr_reader :coins, :vault
+  attr_reader :change, :vault
 
   def initialize(vault=MoneyVault.new)
-    @coins = empty_change_vault
+    @change = empty_change_vault
     @vault = vault
   end
 
   def add(coin)
     fail "The coin is invalid and cannot be added" unless coin_exists?(coin)
-    coins[coin] += 1
+    change[coin] += 1
   end
 
   def total_change
     total = 0
-    coins.each { |k, v| total += k.to_i * v }
+    change.each { |k, v| total += k.to_i * v }
     total
   end
 
   def return_given_change
-    @coins = empty_change_vault
+    @change = empty_change_vault
   end
 
   def complete_transaction
-    vault.coin_stored_list.each { |k, _v| vault.coin_stored_list[k] += coins[k] }
+    vault.coin_stored_list.each { |k, _v| vault.coin_stored_list[k] += change[k] }
     return_given_change
   end
 
@@ -45,6 +45,6 @@ class ChangeMachine
   end
 
   def coin_exists?(coin)
-    coins.include?(coin)
+    change.include?(coin)
   end
 end
