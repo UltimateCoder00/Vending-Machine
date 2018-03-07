@@ -5,8 +5,8 @@ class Stock
   MAXPRODUCTQUANTITY = 10
 
   def initialize
-    @price_list = CSV.new(File.new(Dir.pwd + './db/stock_product_price_list_db.csv')).to_h
-    @product_quantity_list = CSV.new(File.new(Dir.pwd + './db/stock_product_quantity_list_db.csv')).to_h
+    @price_list = CSV.new(File.new(Dir.pwd + '/db/stock_product_price_list_db.csv')).to_h
+    @product_quantity_list = CSV.new(File.new(Dir.pwd + '/db/stock_product_quantity_list_db.csv')).to_h
     render_stock_product_db
   end
 

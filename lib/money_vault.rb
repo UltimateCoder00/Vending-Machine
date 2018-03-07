@@ -4,7 +4,7 @@ class MoneyVault
   attr_reader :coin_stored_list
 
   def initialize
-    @coin_stored_list = CSV.new(File.new(Dir.pwd + './db/coin_stored_list_db.csv')).to_h
+    @coin_stored_list = CSV.new(File.new(Dir.pwd + '/db/coin_stored_list_db.csv')).to_h
     render_coin_stored_db
   end
 
